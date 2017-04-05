@@ -122,9 +122,7 @@
 
     :world-government
     {:name :world-government
-     :event-chances {:nuclear-weapons -1
-                     :nuclear-strike -1
-                     :nuclear-war -1}
+     :event-chances {:nuclear-strike -1}
      :desc ["In $STARDATE, following decades of negotiation, the various "
             "sovereign $CIV nations came to an agreement concerning the "
             "establishment of a unified planet-wide government for all of the "
@@ -133,9 +131,7 @@
     :nuclear-weapons
     {:name :nuclear-weapons
      :prereqs #{:flight :nuclear-physics :rocketry}
-     :event-chances {:nuclear-strike (/ +1 90)
-                     :nuclear-war (/ +1 90)
-                     :skynet (/ +1 90)}
+     :event-chances {:nuclear-strike (/ +1 90)}
      :desc ["In $STARDATE, the $CIV successfully detonated their first "
             "prototype nuclear weapon. It remains unclear whether the $CIV "
             "scientists who worked on the bomb understand the sheer "
@@ -143,7 +139,7 @@
 
     :nuclear-strike
     {:name :nuclear-strike
-     :event-chances {:nuclear-war (/ +1 90)}
+     :event-chances {:pets (/ +3 1000)}
      :desc ["In $STARDATE, a single nuclear weapon was deployed in an attack "
             "on a $SIZE $CIV city. The incident did not escalate into "
             "a full-scale nuclear war, but the city was almost completely "
