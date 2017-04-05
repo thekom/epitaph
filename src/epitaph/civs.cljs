@@ -52,7 +52,7 @@
 (def all-traits
   ["adaptable" "adventurous" "aloof" "analytical" "arrogant" "artistic" "avaricious" "anxious"
    "belligerent" "boisterous" "bold" "brusque"
-   "clannish" "creative" "curious"
+   "clannish" "creative" "curious" "cool"
    "daring" "delicate" "devout" "diligent" "diminutive" "duplicitous"
    "elegant" "enduring" "enterprising" "enthusiastic"
    "fearful" "flamboyant"
