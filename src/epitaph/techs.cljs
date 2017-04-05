@@ -2,11 +2,7 @@
 
 (def all-techs
   [{:name :toolmaking
-    :event-chances {:overhunting (/ +4 1000)
-                    :overfishing (/ -3 1000)
-                    :crop-failure (/ -3 1000)
-                    :food-illness (/ +1 1000)
-                    :pets (/ +3 1000)
+    :event-chances {:pets (/ +3 1000)
                     :conqueror (/ +1 1000)}
     :desc ["The $CIV $USE stone tools $FOR$JOINER hunting the wild $BEAST."]
     :vocab {"$USE" ["make extensive use of" "make use of"
@@ -19,10 +15,7 @@
                        ". This has dramatically improved their efficiency in"]}}
 
    {:name :agriculture
-    :event-chances {:overhunting (/ -3 1000)
-                    :overfishing (/ -3 1000)
-                    :crop-failure (/ +4 1000)
-                    :pets (/ +4 1000)}
+    :event-chances {:pets (/ +4 1000)}
     :desc ["The $CIV have begun to cultivate crops$INCLUDING $THE_CROP."]
     :vocab {"$INCLUDING" [", including"
                           ". One especially popular crop is"
@@ -42,18 +35,14 @@
             "$BIOME_B" ["floodplains" "plains" "riverbanks"]}}
 
    {:name :fishing
-    :event-chances {:overhunting (/ -3 1000)
-                    :overfishing (/ +4 1000)
-                    :crop-failure (/ -3 1000)
-                    :food-illness (/ +1 1000)}
+    :event-chances {:pets (/ +4 1000)}
     :desc ["The $CIV have learned how to catch water-dwelling creatures such "
            "as the $FISH, which is now $AN_IMPORTANT part of the $CIV diet."]
     :vocab {"$AN_IMPORTANT" ["an important" "a staple"]}}
 
    {:name :writing
     :set-vars {:tech-chance (/ 1 60)}
-    :event-chances {:war-over-metal (/ -1 1000)
-                    :conqueror (/ +3 1000)
+    :event-chances {:conqueror (/ +3 1000)
                     :religion (/ +1 1000)}
     :desc ["The $CIV have developed a simple system of writing, which they use "
            "primarily for $PURPOSE."]
@@ -67,8 +56,7 @@
 
    {:name :fire
     :prereqs #{:toolmaking}
-    :event-chances {:forest-fire (/ +2 1000)
-                    :food-illness (/ -3 1000)}
+    :event-chances {:pets (/ +4 1000)}
     :desc ["$INTRO $CIV have mastered the control of fire. They use it to "
            "cook their food, and to light their villages at night."]
     :vocab {"$INTRO" ["$DESPITE a few $EARLY mishaps, the" "The" "The"]
@@ -77,17 +65,13 @@
 
    {:name :metalworking
     :prereqs #{:fire}
-    :event-chances {:war-over-metal (/ +3 1000)
-                    :conqueror (/ +4 1000)}
+    :event-chances {:conqueror (/ +4 1000)}
     :desc ["The $CIV have discovered how to forge molten metal into jewelry, "
            "tools, weapons, and armor."]}
 
    {:name :construction
     :prereqs #{:toolmaking :agriculture}
     :event-chances {:large-city (/ +1 1000)
-                    :city-plague (/ +2.5 1000)
-                    :war-over-metal (/ -1 1000)
-                    :forest-fire (/ -2 1000)
                     :conqueror (/ +2 1000)
                     :pets (/ +1 1000)
                     :religion (/ +3 1000)}
@@ -107,9 +91,7 @@
 
    {:name :sailing
     :prereqs #{:astronomy :construction}
-    :event-chances {:sea-plague (/ +2 1000)
-                    :large-city (/ +1 1000)
-                    :war-over-metal (/ -2 1000)
+    :event-chances {:large-city (/ +1 1000)
                     :city-trade (/ +7 1000)}
     :desc ["The $CIV have learned how to build ships and sail them across the "
            "oceans of $PLANET to explore and trade over increasingly greater "
@@ -118,7 +100,6 @@
    {:name :architecture
     :prereqs #{:construction :mathematics}
     :event-chances {:large-city (/ +5 1000)
-                    :city-fire (/ -1 1000)
                     :religion (/ +5 1000)}
     :desc ["The $CIV have begun to make use of more sophisticated construction "
            "techniques, relying on sturdy structural elements such as arches "
@@ -126,9 +107,7 @@
 
    {:name :plumbing
     :prereqs #{:construction :metalworking}
-    :event-chances {:large-city (/ +3 1000)
-                    :city-plague (/ -2 1000)
-                    :sea-plague (/ -1 1000)}
+    :event-chances {:large-city (/ +3 1000)}
     :desc ["The $CIV have built elaborate pipe and sewer systems to supply "
            "their larger settlements, such as $CITY, with fresh water and a "
            "hygenic means of waste disposal."]}
@@ -230,8 +209,7 @@
 
    {:name :germ-theory
     :prereqs #{:calculus :taxonomy}
-    :event-chances {:city-plague (/ -1 1000)
-                    :sea-plague (/ -1 1000)}
+    :event-chances {:pets (/ +3 1000)}
     :desc ["$THE $IDEA that diseases $ARE caused by microorganisms has begun "
            "to catch on among the $CIV, leading to the widespread adoption of "
            "public health policies which have greatly reduced the spread of "
@@ -243,7 +221,7 @@
 
    {:name :genetics
     :prereqs #{:germ-theory}
-    :event-chances {:bioterrorism (/ +1 360)}
+    :event-chances {:pets (/ +3 1000)}
     :desc ["The $CIV have arrived at a sophisticated understanding of "
            "genetics, which has enabled them to craft new forms of life by "
            "deliberately modifying the genes of existing organisms."]}
@@ -272,7 +250,7 @@
 
    {:name :spaceflight
     :prereqs #{:digital-computers :flight :rocketry}
-    :event-chances {:asteroid (/ -1 2000)}
+    :event-chances {:pets (/ +3 1000)}
     :desc ["The $CIV have taken their first tentative steps into space, "
            "launching craft capable of supporting several individuals into "
            "orbit around $PLANET before retrieving them safely."]}
@@ -287,20 +265,19 @@
 
    {:name :artificial-intelligence
     :prereqs #{:networked-computers}
-    :event-chances {:skynet (/ +1 180)}
+    :event-chances {:pets (/ +3 1000)}
     :desc ["The $CIV have developed a form of artificial general intelligence "
            "which rivals many of their own intellectual capabilities."]}
 
    {:name :nanotechnology
     :prereqs #{:networked-computers :quantum-physics}
-    :event-chances {:gray-goo (/ +1 180)}
+    :event-chances {:pets (/ +3 1000)}
     :desc ["The $CIV have begun to experiment with the use of \"intelligent "
            "materials\", in the form of swarms of programmable nanobots."]}
 
    {:name :space-colonization
     :prereqs #{:nanotechnology :networked-computers :spaceflight}
-    :event-chances {:asteroid -1
-                    :volcano -1
+    :event-chances {:pets (/ +3 1000)
                     :world-government (/ +2 90)}
     :desc ["The $CIV have begun to establish permanent colonies on worlds "
            "other than $PLANET. Although still largely unable to travel "
