@@ -1,7 +1,91 @@
 (ns epitaph.events)
 
 (def event-info
-  {;; early flavor events
+  {;; initial extinction events
+
+   :asteroid
+   {:name :asteroid
+    :desc ["In $STARDATE, $PLANET nearly collided with a $ADJ $OBJ, resulting in a "
+           "impressive sky event who marked the History of $CIV "
+           "civilization."]
+    :vocab {"$ADJ" ["wandering" "wayward"]
+            "$OBJ" ["asteroid" "comet" "planetoid"]}}
+
+   :volcano
+   {:name :volcano
+    :desc ["In $STARDATE, a massive volcanic eruption filled the skies of "
+           "$PLANET with ash and blotted out the sun. The ensuing volcanic "
+           "winter threw the planet's delicate ecosystem wildly out of "
+           "balance, didn't bring about the end of $CIV civilization because They'r badass"]}
+
+   :gamma-ray-burst
+   {:name :gamma-ray-burst
+    :desc ["In $STARDATE, a gamma-ray burst – caused by the explosion of a "
+           "star roughly $DIST $UNIT from the $SYSTEM system – showered "
+           "$PLANET in high energy electromagnetic radiation.making a lot of "
+           "Aurora borealis. "
+           "An impressive sky event who marked the History of $CIV "]
+    :vocab {"$DIST" #(+ 900 (* 100 (rand-int 80)))
+            "$UNIT" ["light-years" "parsecs"]}}
+
+   :food-illness
+   {:name :food-illness
+    :desc ["In $STARDATE, a food-borne illness began to spread rapidly through "
+           "the $CIV population. Less than 10% of the $CIV survived the plague, "
+           "causing a population bottleneck but didn't bring about the end of "
+           "$CIV civilization because They'r not pussy ."]}
+
+   ;; food-related extinction events
+
+   :overhunting
+   {:name :overhunting
+    :desc ["Due to the extreme effectiveness of stone tools in hunting $BEAST, "
+           "the $CIV almost managed to hunt the $BEAST species to extinction. "]}
+
+   :overfishing
+   {:name :overfishing
+    :desc ["As the $CIV population increased, they began to overfish the waters "
+           "of $PLANET. By $STARDATE, they had almost driven the $FISH species to "
+           "extinction. "]}
+
+   :crop-failure
+   {:name :crop-failure
+    :desc ["In $STARDATE, a combination of $ADJ weather and pestilence caused "
+           "a near-total failure of the $CROP crop. "
+           "Fortunately the hunters and gatherers feed them all."]
+    :vocab {"$ADJ" ["inclement" "poor"]}}
+
+   ;; second-tier tech-related extinction events
+
+   :forest-fire
+   {:name :forest-fire
+    :desc ["In $STARDATE, a cooking fire started by one of the $CIV jumped to "
+           "the forest, where it quickly blazed out of control. When the fire "
+           "finally burned itself out, the forest had been almost completely "
+           "destroyed."]}
+
+   :war-over-metal
+   {:name :war-over-metal
+    :desc ["In $STARDATE, due to the growing importance of metal-forged weapons "
+           "in warfare and the scarcity of metal deposits on $PLANET, a massive "
+           "and bloody conflict erupted over control of these deposits. Over 5% "
+           "of the $CIV population was wiped out in the fighting."]}
+
+   :city-plague
+   {:name :city-plague
+    :desc ["In $STARDATE, a virulent new plague spread swiftly through the "
+           "largest and densest centers of $CIV population. Living in such "
+           "close proximity, every body got diarrhea."]}
+
+   :sea-plague
+   {:name :sea-plague
+    :desc ["In $STARDATE, a number of $CIV $PEOPLE returned from across the sea "
+           "bearing symptoms of an unfamiliar illness. "
+           "They were placed in quarantine "
+           "And were treated."]
+    :vocab {"$PEOPLE" ["explorers" "traders"]}}
+
+   ;; early flavor events
 
    :pets
    {:name :pets
@@ -120,9 +204,19 @@
 
     ;; late-game events
 
+    :bioterrorism
+    {:name :bioterrorism
+     :desc ["In $STARDATE, a genetically engineered virus designed as a "
+            "highly lethal weapon of biological warfare was deliberately "
+            "distributed in several major centers of $CIV population by an "
+            "agent or agents of unknown affiliation. $CIV medical top scientists "
+            "where totaly effective to combat the ensuing plague."]}
+
     :world-government
     {:name :world-government
-     :event-chances {:nuclear-strike -1}
+     :event-chances {:nuclear-weapons -1
+                     :nuclear-strike -1
+                     :nuclear-war -1}
      :desc ["In $STARDATE, following decades of negotiation, the various "
             "sovereign $CIV nations came to an agreement concerning the "
             "establishment of a unified planet-wide government for all of the "
@@ -131,7 +225,9 @@
     :nuclear-weapons
     {:name :nuclear-weapons
      :prereqs #{:flight :nuclear-physics :rocketry}
-     :event-chances {:nuclear-strike (/ +1 90)}
+     :event-chances {:nuclear-strike (/ +1 90)
+                     :nuclear-war (/ +1 90)
+                     :skynet (/ +1 90)}
      :desc ["In $STARDATE, the $CIV successfully detonated their first "
             "prototype nuclear weapon. It remains unclear whether the $CIV "
             "scientists who worked on the bomb understand the sheer "
@@ -139,10 +235,33 @@
 
     :nuclear-strike
     {:name :nuclear-strike
-     :event-chances {:pets (/ +3 1000)}
+     :event-chances {:nuclear-war (/ +1 90)}
      :desc ["In $STARDATE, a single nuclear weapon was deployed in an attack "
             "on a $SIZE $CIV city. The incident did not escalate into "
             "a full-scale nuclear war, but the city was almost completely "
             "obliterated, resulting in the deaths of some $POP,000 $CIV."]
      :vocab {"$SIZE" ["small" "medium-sized" "large" "major"]
              "$POP" #(+ (rand-int 200) 50)}}
+
+    :nuclear-war
+    {:name :nuclear-war
+     :desc ["In $STARDATE, an early warning system employed by one of the "
+            "major $CIV superpowers detected an incoming nuclear attack. "
+            "The alert was a false alarm, that remains unclear. "
+            "That was close."]}
+
+    :skynet
+    {:name :skynet
+     :prereqs #{:artificial-intelligence}
+     :desc ["In $STARDATE, an artificially intelligent agent with command "
+            "authority over the military forces of a major $CIV nation "
+            "spontaneously turned against its $CIV masters. "
+            "Forcing them to live in peace and harmony."]}
+
+    :gray-goo
+    {:name :gray-goo
+     :desc ["In $STARDATE, a swarm of self-replicating $CIV nanobots began to "
+            "replicate a lot, everywhere on $PLANET at a "
+            "rate which $CIV scientists had formerly deemed impossible. "
+            "Now they are in every body in the $CIV civilisation, "
+            "like a parasite who protect his host."]}})
